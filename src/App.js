@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "./assets/fonts.css";
+import React from "react";
+
+import Signin from "./components/auth/signIn";
+import Signup from "./components/auth/signUp";
+import Account from "./components/account";
+import { Route, Routes } from "react-router-dom";
+import { AuthContextProvider } from "./context/AuthContext";
+
+import Container from "./components/container";
+import Header from "./components/header";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex  flex-col  justify-between ">
+      <Header />
+
+      <h1 className="flex justify-center  mt-4 text-5xl ">
+        <p className="title">Anabolic Archives</p>
+      </h1>
+      <Container />
     </div>
   );
 }

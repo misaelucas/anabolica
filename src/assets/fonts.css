@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap");
+
+.title {
+    font-family: 'El Messiri', sans-serif;
+    font-weight: 600;
+}
+
+.nav { 
+    font-family: 'El Messiri', sans-serif;
+    font-weight: 500;
+
+}
