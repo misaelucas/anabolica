@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
+import saitama from "../assets/saitama.png";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -17,22 +18,26 @@ export default function Header() {
   };
 
   return (
-    <div className="flex text-lg justify-between nav pt-3 w-full h-12 bg-[#17223B] text-white underline underline-offset-4 font-semibold ">
-      <div></div>
-      <div className="flex bg-[#17223B] space-x-2  ">
-        <div className="bg-[#17223B]">
-          <Link className="bg-[#17223B] hover:text-gray-200" to="/faq">
+    <div className="flex text-lg justify-between nav pt-3 w-full h-14  bg-[#17223B] text-white underline underline-offset-4 font-semibold ">
+      <div>
+        <Link to="/">
+          <img src={saitama} className="pr-2 ml-4 -mt-2 w-16" />
+        </Link>
+      </div>
+      <div className="flex  space-x-2 mt-1  ">
+        <div className=" ">
+          <Link className=" hover:text-gray-200" to="/faq">
             faq
           </Link>
         </div>
         <div>
-          <Link className="bg-[#17223B] hover:text-gray-200" to="/contact">
+          <Link className=" hover:text-gray-200" to="/contact">
             contact
           </Link>
         </div>
       </div>
 
-      <div className="flex  pr-4 justify-between ">
+      <div className="flex  pr-4 mt-1 justify-between ">
         {!user ? (
           <Link to="/login" className="text-lg hover:text-gray-200">
             login
