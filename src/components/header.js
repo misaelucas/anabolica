@@ -1,21 +1,11 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
+
 import saitama from "../assets/saitama.png";
+import { LoginButton } from "./LoginButton";
 
 export default function Header() {
-  const navigate = useNavigate();
 
-  const { user, logout } = UserAuth();
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/");
-      console.log("You are logged out");
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
+
 
   return (
     <div className="flex text-lg justify-between nav pt-3 w-full h-14  bg-[#17223B] text-white underline underline-offset-4 font-semibold ">
@@ -26,20 +16,22 @@ export default function Header() {
       </div>
       <div className="flex  space-x-2 mt-1  ">
         <div className=" ">
-          <Link className=" hover:text-gray-200" to="/faq">
+          <Link className=" hover:text-gray-200 text-xl" to="/faq">
             faq
           </Link>
         </div>
         <div>
-          <Link className=" hover:text-gray-200" to="/contact">
+          <Link className=" hover:text-gray-200 text-xl" to="/contact">
             contact
           </Link>
         </div>
       </div>
 
-      <div className="flex  pr-4 mt-1 justify-between ">
+      <LoginButton />
+
+      {/* <div className="flex  pr-4 mt-1 justify-between ">
         {!user ? (
-          <Link to="/login" className="text-lg hover:text-gray-200">
+          <Link to="/login" className="text-xl hover:text-gray-200">
             login
           </Link>
         ) : (
@@ -47,7 +39,7 @@ export default function Header() {
             Logout
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

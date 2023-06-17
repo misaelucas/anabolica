@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import Header from "../header";
-import saitama_login from "../../assets/saitama_login.gif";
+import Header from "../Header";
 
 const Signin = () => {
   const [email, setEmail] = useState("");

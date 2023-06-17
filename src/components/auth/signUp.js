@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import Header from "../header";
+import Header from "../Header";
 
 const Signup = () => {
   const [email, setEmail] = useState("");

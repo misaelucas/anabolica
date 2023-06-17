@@ -5,6 +5,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+
 import { auth } from "../firebase/config";
 
 const UserContext = createContext();
@@ -27,6 +28,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
+      console.log('doidera');
       setUser(currentUser);
     });
     return () => {

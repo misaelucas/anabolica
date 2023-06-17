@@ -9,7 +9,8 @@ import Signin from "./components/auth/signIn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedRouteSignUp from "./components/ProtectedRouteSignUp";
 
-import Account from "./components/account";
+import Account from "./components/Account";
+import NewProtocol from "./pages/NewProtocol";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -39,6 +40,14 @@ root.render(
             element={
               <ProtectedRoute>
                 <Account />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/new"
+            element={
+              <ProtectedRoute>
+                <NewProtocol />
               </ProtectedRoute>
             }
           />
