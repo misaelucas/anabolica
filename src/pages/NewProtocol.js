@@ -6,6 +6,7 @@ import {
   query,
   onSnapshot,
   doc,
+  setDoc,
   updateDoc,
   deleteDoc,
   addDoc,
@@ -19,41 +20,63 @@ const NewProtocol = () => {
   const [finalWeight, setFinalWeight] = useState();
   const [strategy, setStrategy] = useState("Recomp");
   const [height, setHeight] = useState("");
-  const [substancesUsed, setSubstancesUsed] = useState([]);
   const [kcal, setKcal] = useState("");
-  const [users, setUsers] = useState([]);
-  const [Subject, setSubject] = useState("");
-  const [protocolSubstance, setProtocolSubstance] = useState();
-  const [protocolArray, setProtocolArray] = useState([]);
+  const [protocolSubstance, setProtocolSubstance] = useState("Testosterone");
+  const [protocolObject, setProtocolObject] = useState({});
   const [dosage, setDosage] = useState();
   const [weeks, setWeeks] = useState();
-  const [frequency, setFrequency] = useState();
+  const [frequency, setFrequency] = useState("Twice a day");
+  const [error, setError] = useState();
+  const protocolRef = collection(db, "protocols");
 
-  const usersCollectionRef = collection(db, "users");
-  useEffect(() => {
-    const getUsers = async () => {};
-
-    getUsers();
-  });
-
+  // useEffect(() => {
+  //   checkTrue();
+  // })  ;
+  let CompoundList = () => {
+    return (
+      <div>
+        <div>{protocolObject.frequency}</div>
+        <div>{protocolObject.dosage}</div>
+        <div>{protocolObject.weeks}</div>
+        <div>{protocolObject.substance}</div>
+      </div>
+    );
+  };
+  // const checkTrue = (e) => {};
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (Subject !== "") {
+    try {
       await addDoc(collection(db, "protocols"), {
-        Subject,
-        completed: false,
-        name,
+        name: name,
+        age: age,
+        duration: duration,
+        initial: initial,
+        finalWeight: finalWeight,
+        strategy: strategy,
+        height: height,
+        kcal: kcal,
+        protocol: protocolObject,
       });
-      setSubject("");
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
     }
   };
 
-  const addCompound = (e) => {
+  const addCompound = async (e) => {
     e.preventDefault();
-    setProtocolArray(e);
+
+    setProtocolObject({
+      substance: protocolSubstance,
+      frequency: frequency,
+      weeks: weeks,
+      dosage: dosage,
+    });
   };
+
   return (
     <div className="mb-6">
+      <CompoundList />
       <Header />
       <section className="max-w-4xl p-6 cursive mx-auto  rounded-md shadow-md dark:bg-gray-800 mt-20">
         <h1 className="text-3xl mb-6 font-bold text-white dark:text-white">
@@ -225,6 +248,7 @@ const NewProtocol = () => {
                 <option>Every 14 days</option>
               </select>
             </div>
+            <CompoundList />
 
             <button
               type="submit"
@@ -236,7 +260,7 @@ const NewProtocol = () => {
           </div>
           <div className="flex justify-end mt-6">
             <button
-              onClick={setProtocolArray}
+              onClick={handleSubmit}
               className="px-6 py-2 uppercase leading-5 text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600"
             >
               Submit!
