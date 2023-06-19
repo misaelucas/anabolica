@@ -8,7 +8,7 @@ export default function Header() {
 
 
   return (
-    <div className="flex text-lg justify-between nav pt-3 w-full h-14  bg-[#17223B] text-white underline underline-offset-4 font-semibold ">
+    <div className="flex text-lg justify-between cursive pt-3 w-full h-14  dark:bg-gray-800 text-white underline underline-offset-4 font-semibold ">
       <div>
         <Link to="/">
           <img src={saitama} className="pr-2 ml-4 -mt-2 w-16" />

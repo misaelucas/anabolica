@@ -1,12 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap");
 
 .title {
-    font-family: 'El Messiri', sans-serif;
-    font-weight: 600;
+  font-family: "El Messiri", sans-serif;
+  font-weight: 600;
 }
 
-.nav { 
-    font-family: 'El Messiri', sans-serif;
-    font-weight: 500;
-
+.cursive {
+  font-family: "Amatic SC", cursive;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+.nav {
+  font-family: "El Messiri", sans-serif;
+  font-weight: 500;
 }

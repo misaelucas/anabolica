@@ -29,7 +29,7 @@ export const NewProtocolButton = () => {
       <div className="flex justify-center">
         <button
           onClick={goToCreateProtocol}
-          className="bg-[#17223B] font-mono text-lg drop-shadow-xl rounded  drop-shadow hover:bg-[#030617]  p-3 mt-6 text-white"
+          className="dark:bg-gray-800 cursive text-2xl drop-shadow-xl rounded  drop-shadow hover:bg-[#030617]  p-3 mt-6 text-white"
         >
           Create a new protocol!
         </button>
