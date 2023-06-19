@@ -27,13 +27,15 @@ const Signup = () => {
     <div>
       <Header />
       <div
-        className="max-w-[400px] rounded bg-[#35a653] drop-shadow-xl
+        className="max-w-[400px] rounded bg-green-600 drop-shadow-xl
        mx-auto  justify-center flex flex-col my-16 p-4"
       >
         <form onSubmit={handleSubmit}>
-            <h1 className="text-white font-mono flex justify-center text-2xl underline underline-offset-4 pb-4">Create your account</h1>
+          <h1 className="text-white cursive flex justify-center text-4xl underline underline-offset-4 pb-4">
+            Create your account
+          </h1>
           <div className="flex flex-col py-2">
-            <label className="py-2 text-white font-mono text-lg">
+            <label className="py-2 text-white cursive text-2xl">
               Email Address
             </label>
             <input
@@ -43,16 +45,14 @@ const Signup = () => {
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className="py-2 text-white font-mono text-lg">
-              Password
-            </label>
+            <label className="py-2 text-white cursive text-2xl">Password</label>
             <input
               onChange={(e) => setPassword(e.target.value)}
               className="border p-1"
               type="password"
             />
           </div>
-          <button className="bg-[#17223B] font-mono text-lg drop-shadow-xl rounded drop-shadow hover:bg-[#030617] w-full  p-4 my-2 text-white">
+          <button className="bg-[#17223B] cursive text-2xl drop-shadow-xl rounded drop-shadow hover:bg-[#030617] w-full  p-4 my-2 text-white">
             Register
           </button>
         </form>

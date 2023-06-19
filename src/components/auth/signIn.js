@@ -26,12 +26,12 @@ const Signin = () => {
     <div>
       <Header />
       <div
-        className="max-w-[400px] rounded bg-[#35a653] drop-shadow-xl
+        className="max-w-[400px] rounded bg-green-600 drop-shadow-xl
        mx-auto items-center justify-center flex flex-col my-16 p-4"
       >
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col py-2">
-            <label className="py-2 text-white font-mono text-lg font-medium">
+          <div className="flex flex-col py-2 text-2xl">
+            <label className="py-2  text-white cursive font-medium">
               Email Address
             </label>
             <input
@@ -40,8 +40,8 @@ const Signin = () => {
               type="email"
             />
           </div>
-          <div className="flex flex-col py-2">
-            <label className="py-2 text-white font-mono text-lg">
+          <div className="flex flex-col py-2 ">
+            <label className="py-2 text-white cursive text-2xl">
               Password
             </label>
             <input
@@ -50,12 +50,12 @@ const Signin = () => {
               type="password"
             />
           </div>
-          <button className="bg-[#17223B] font-mono text-lg drop-shadow-xl rounded drop-shadow hover:bg-[#030617] w-full  p-4 my-2 text-white">
+          <button className="bg-[#17223B] cursive text-2xl drop-shadow-xl rounded drop-shadow hover:bg-[#030617] w-full  p-4 my-2 text-white">
             Login
           </button>
-          <p className="py-2 font-mono text-white">
+          <p className="py-2 cursive text-white text-xl">
             Don't have an account yet?{" "}
-            <Link to="/register" className="underline">
+            <Link to="/register" className="underline underline-offset-4">
               Register.
             </Link>
           </p>
