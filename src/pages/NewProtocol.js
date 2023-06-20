@@ -11,6 +11,7 @@ import {
   deleteDoc,
   addDoc,
 } from "firebase/firestore";
+import { settings } from "firebase/analytics";
 
 const NewProtocol = () => {
   const [name, setName] = useState("");
@@ -22,27 +23,33 @@ const NewProtocol = () => {
   const [height, setHeight] = useState("");
   const [kcal, setKcal] = useState("");
   const [protocolSubstance, setProtocolSubstance] = useState("Testosterone");
-  const [protocolObject, setProtocolObject] = useState({});
+  const [protocolObject, setProtocolObject] = useState([]);
   const [dosage, setDosage] = useState();
   const [weeks, setWeeks] = useState();
   const [frequency, setFrequency] = useState("Twice a day");
   const [error, setError] = useState();
   const protocolRef = collection(db, "protocols");
+  const [disabled, setDisabled] = useState(true);
+  const [compoundArray, setCompoundArray] = useState([]);
+  const [ester, setEster] = useState("Enanthate");
+  const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   checkTrue();
-  // })  ;
-  let CompoundList = () => {
-    return (
-      <div>
-        <div>{protocolObject.frequency}</div>
-        <div>{protocolObject.dosage}</div>
-        <div>{protocolObject.weeks}</div>
-        <div>{protocolObject.substance}</div>
-      </div>
-    );
-  };
-  // const checkTrue = (e) => {};
+  useEffect(() => {
+    const checkDisabled = () => {
+      if (
+        frequency !== undefined &&
+        dosage !== undefined &&
+        weeks !== undefined &&
+        protocolSubstance !== undefined &&
+        ester !== undefined
+      ) {
+        setDisabled(false);
+      }
+    };
+    
+    checkDisabled();
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -55,28 +62,29 @@ const NewProtocol = () => {
         strategy: strategy,
         height: height,
         kcal: kcal,
-        protocol: protocolObject,
+        protocol: compoundArray,
       });
     } catch (e) {
       setError(e.message);
       console.log(e.message);
     }
   };
-
-  const addCompound = async (e) => {
+  const addCompound = (e) => {
     e.preventDefault();
-
-    setProtocolObject({
+    const newCompoundObject = {
       substance: protocolSubstance,
       frequency: frequency,
       weeks: weeks,
       dosage: dosage,
-    });
+      ester: ester,
+    };
+    setProtocolObject(newCompoundObject);
+    setCompoundArray([...compoundArray, newCompoundObject]);
   };
 
   return (
     <div className="mb-6">
-      <CompoundList />
+      {/* <CompoundList /> */}
       <Header />
       <section className="max-w-4xl p-6 cursive mx-auto  rounded-md shadow-md dark:bg-gray-800 mt-20">
         <h1 className="text-3xl mb-6 font-bold text-white dark:text-white">
@@ -108,7 +116,6 @@ const NewProtocol = () => {
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               />
             </div>
-
             <div>
               <label
                 className="text-white dark:text-gray-200"
@@ -121,7 +128,7 @@ const NewProtocol = () => {
                 id="duration"
                 type="number"
                 required
-                placeholder="in numbers"
+                placeholder="in weeks"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               />
             </div>
@@ -209,6 +216,24 @@ const NewProtocol = () => {
                 <option>Oxymetholone</option>
               </select>
             </div>
+            <div className="">
+              <label className="text-white dark:text-gray-200">Esters</label>
+              <select
+                onChange={(e) => setEster(e.target.value)}
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              >
+                <option>Enanthate</option>
+                <option>Propionate</option>
+                <option>Cypionate</option>
+                <option>Decanoate</option>
+                <option>Undecanoate</option>
+                <option>Phenylproprionate</option>
+                <option>Oral</option>
+                <option>
+                  Injectable (option for stanozolol and Primobolan)
+                </option>
+              </select>
+            </div>
             <div>
               <label className="text-white dark:text-gray-200">Dosage</label>
               <input
@@ -248,22 +273,36 @@ const NewProtocol = () => {
                 <option>Every 14 days</option>
               </select>
             </div>
-            <CompoundList />
-
             <button
               type="submit"
+              disabled={disabled}
               onClick={addCompound}
               className="px-6 py-2 leading-5 text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600"
             >
               Add compound
             </button>
           </div>
-          <div className="flex justify-end mt-6">
+          {compoundArray !== [] ? (
+            compoundArray.map((item, i) => {
+              return (
+                <div
+                  key={i}
+                  className=" p-2 cursive  text-white w-1/3 flex justify-center rounded-md shadow-md bg-yellow-600	 mt-3 "
+                >
+                  <p className="mr-2 text-xl">{item.substance} added</p>
+                </div>
+              );
+            })
+          ) : (
+            <></>
+          )}
+
+          <div className="flex justify-end mt-12">
             <button
               onClick={handleSubmit}
-              className="px-6 py-2 uppercase leading-5 text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600"
+              className="px-6 py-2  leading-5 text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600"
             >
-              Submit!
+              Submit Protocol!
             </button>
           </div>
         </div>
