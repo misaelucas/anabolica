@@ -1,0 +1,17 @@
+body {
+  backdrop-filter: blur(3px);
+}
+
+.spinnerz {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.Zawarudo {
+}
