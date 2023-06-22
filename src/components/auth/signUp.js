@@ -52,7 +52,7 @@ const Signup = () => {
               type="password"
             />
           </div>
-          <button className="bg-[#17223B] cursive text-2xl drop-shadow-xl rounded drop-shadow hover:bg-[#030617] w-full  p-4 my-2 text-white">
+          <button className="dark:bg-gray-800 cursive text-2xl drop-shadow-xl rounded drop-shadow hover:bg-[#030617] w-full  p-4 my-2 text-white">
             Register
           </button>
         </form>
