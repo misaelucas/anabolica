@@ -25,17 +25,25 @@ export default function Container() {
   }, []);
 
   return (
-    <div className="w-912 mx-4 flex-wrap pt-10 justify-center rounded dark:bg-gray-800 flex mt-12">
+    <div className=" mx-4 flex-wrap  justify-center rounded text-white dark:bg-gray-800 flex mt-12">
       {protocol.map((item) => {
         return (
-          <div className="w-1/5 m-5 rounded items-center justify-center flex bg-green-600 h-64">
-            <div className="flex flex-col">
-              <div className="titulo  ">{item.name}</div>
+          <div className="w-1/4 mt-12 border  flex flex-col justify-center text-gray-800 items-center overflow-hidden cursive h-100 m-4 rounded overflow-hidden bg-white shadow-lg">
+            <div className="text-xl mb-2 mt-2 justify-center lowercase">{item.name}</div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-gray-700 text-base">{item.age}</div>
+              <div
+                className="bg-green-500
+                   text-white py-1 px-2 rounded text-xs font-bold"
+              >
+                Natural{" "}
+                
+              </div>
             </div>
+            
           </div>
         );
       })}
-
     </div>
   );
 }
