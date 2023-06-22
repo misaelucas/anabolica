@@ -28,7 +28,6 @@ export default function Header() {
       </div>
 
       <LoginButton />
-
       {/* <div className="flex  pr-4 mt-1 justify-between ">
         {!user ? (
           <Link to="/login" className="text-xl hover:text-gray-200">
