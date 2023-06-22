@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
+import "../assets/fonts.css";
 import { db } from "../firebase/config";
 import {
   collection,
@@ -12,6 +14,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { settings } from "firebase/analytics";
+import { Loading } from "../components/Loading";
 
 const NewProtocol = () => {
   const [name, setName] = useState("");
@@ -33,6 +36,8 @@ const NewProtocol = () => {
   const [compoundArray, setCompoundArray] = useState([]);
   const [ester, setEster] = useState("Enanthate");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   useEffect(() => {
     const checkDisabled = () => {
@@ -46,7 +51,7 @@ const NewProtocol = () => {
         setDisabled(false);
       }
     };
-    
+
     checkDisabled();
   });
 
@@ -64,6 +69,10 @@ const NewProtocol = () => {
         kcal: kcal,
         protocol: compoundArray,
       });
+      setLoading(true);
+      await delay(2000);
+      setLoading(false);
+      navigate("/");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
@@ -71,6 +80,7 @@ const NewProtocol = () => {
   };
   const addCompound = (e) => {
     e.preventDefault();
+
     const newCompoundObject = {
       substance: protocolSubstance,
       frequency: frequency,
@@ -78,20 +88,24 @@ const NewProtocol = () => {
       dosage: dosage,
       ester: ester,
     };
+
     setProtocolObject(newCompoundObject);
     setCompoundArray([...compoundArray, newCompoundObject]);
   };
 
   return (
     <div className="mb-6">
+      
       {/* <CompoundList /> */}
-      <Header />
+      <Header />,
+      {loading ? <Loading /> : <></>}
+
       <section className="max-w-4xl p-6 cursive mx-auto  rounded-md shadow-md dark:bg-gray-800 mt-20">
         <h1 className="text-3xl mb-6 font-bold text-white dark:text-white">
           Create a new one!
         </h1>
         <div>
-          <div className="grid text-xl grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+          <div className="grid text-lg grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
               <label className="text-white dark:text-gray-200">
                 Name your protocol:
@@ -197,7 +211,7 @@ const NewProtocol = () => {
 
             <div className="">
               <label className="text-white dark:text-gray-200">
-                Add compound to your protocol
+                Add compound to your protocol:
               </label>
               <select
                 onChange={(e) => setProtocolSubstance(e.target.value)}
@@ -277,7 +291,7 @@ const NewProtocol = () => {
               type="submit"
               disabled={disabled}
               onClick={addCompound}
-              className="px-6 py-2 leading-5 text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600"
+              className="px-6 py-2 leading-5 tracking-widest text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none "
             >
               Add compound
             </button>
@@ -287,9 +301,11 @@ const NewProtocol = () => {
               return (
                 <div
                   key={i}
-                  className=" p-2 cursive  text-white w-1/3 flex justify-center rounded-md shadow-md bg-yellow-600	 mt-3 "
+                  className="p-2 cursive addedSubstanceBlock text-white w-1/2 fix flex justify-center rounded-md shadow-md bg-yellow-600	 mt-3 "
                 >
-                  <p className="mr-2 text-xl">{item.substance} added</p>
+                  <p className="mx-auto  w-max  text-xl flex addedSubstanceBlock">
+                    {item.substance} added
+                  </p>
                 </div>
               );
             })
@@ -300,11 +316,13 @@ const NewProtocol = () => {
           <div className="flex justify-end mt-12">
             <button
               onClick={handleSubmit}
-              className="px-6 py-2  leading-5 text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600"
+              className="px-6 py-2  tracking-widest leading-5 text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none"
             >
               Submit Protocol!
             </button>
+
           </div>
+          
         </div>
       </section>
     </div>

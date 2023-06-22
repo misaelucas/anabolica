@@ -37,14 +37,14 @@ export const LoginButton = () => {
   }
   if (user) {
     return (
-      <button onClick={handleLogout} className="mb-2 pr-4 text-lg">
-        Logout
+      <button onClick={handleLogout} className="mb-2 pr-4 text-xl">
+        logout
       </button>
     );
   }
   return (
     <div className="flex  pr-4 mt-1 justify-between ">
-      <Link to="/login" className="text-xl hover:text-gray-200">
+      <Link to="/login" className="text-lg hover:text-gray-200">
         login
       </Link>
     </div>
