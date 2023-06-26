@@ -26,9 +26,9 @@ export default function Container() {
 
   return (
     <div className=" mx-4 flex-wrap  justify-center rounded text-white dark:bg-gray-800 flex mt-12">
-      {protocol.map((item) => {
+      {protocol.map((item, key) => {
         return (
-          <div className="w-1/4 mt-12 border  flex flex-col justify-center text-gray-800 items-center overflow-hidden cursive h-100 m-4 rounded overflow-hidden bg-white shadow-lg">
+          <div key={item.id} className="w-1/4 mt-12 border  flex flex-col justify-center text-gray-800 items-center overflow-hidden cursive h-100 m-4 rounded overflow-hidden bg-white shadow-lg">
             <div className="text-xl mb-2 mt-2 justify-center lowercase">{item.name}</div>
             <div className="flex items-center justify-between mb-4">
               <div className="text-gray-700 text-base">{item.age}</div>
