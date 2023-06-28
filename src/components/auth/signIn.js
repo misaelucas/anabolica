@@ -26,7 +26,7 @@ const Signin = () => {
     <div>
       <Header />
       <div
-        className="max-w-[400px] rounded bg-green-600 drop-shadow-xl
+        className="max-w-[400px] rounded bg-green-800 drop-shadow-xl
        mx-auto items-center justify-center flex flex-col my-16 p-4"
       >
         <form onSubmit={handleSubmit}>
@@ -48,7 +48,7 @@ const Signin = () => {
               type="password"
             />
           </div>
-          <button className="dark:bg-gray-800 cursive text-2xl drop-shadow-xl rounded drop-shadow hover:bg-[#030617] w-full  p-4 my-2 text-white">
+          <button className="dark:bg-gray-900 cursive text-2xl drop-shadow-xl rounded drop-shadow hover:bg-[#030617] w-full  p-4 my-2 text-white">
             Login
           </button>
           <p className="py-2 cursive text-white text-xl">

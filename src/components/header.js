@@ -8,10 +8,10 @@ export default function Header() {
 
 
   return (
-    <div className="flex text-lg justify-between cursive pt-3 w-full h-14  dark:bg-gray-800 text-white underline underline-offset-4 font-semibold ">
+    <div className="flex text-lg justify-between cursive pt-3 w-full h-14  dark:bg-gray-900 text-white underline underline-offset-4 font-semibold ">
       <div>
         <Link to="/">
-          <img src={saitama} className="pr-2 ml-4 -mt-2 w-16" />
+          <img src={saitama} alt="saitama bald head" className="pr-2 ml-4 -mt-2 w-16" />
         </Link>
       </div>
       <div className="flex  space-x-2 mt-1  ">
