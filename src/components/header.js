@@ -15,24 +15,7 @@ export default function Header() {
           />
         </Link>
       </div>
-      <div className="flex text-xl space-x-2 mt-1  ">
-        <div className=" ">
-          <Link
-            className="hover:bg-pink-700 hover:text-white p-1 duration-500"
-            to="/faq"
-          >
-            faq
-          </Link>
-        </div>
-        <div>
-          <Link
-            className="hover:bg-pink-700 hover:text-white p-1 duration-500"
-            to="/contact"
-          >
-            contact
-          </Link>
-        </div>
-      </div>
+      <div className="flex text-xl space-x-2 mt-1  "></div>
 
       <LoginButton />
       {/* <div className="flex  pr-4 mt-1 justify-between ">

@@ -4,8 +4,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
-
 import { auth } from "../firebase/config";
 
 const UserContext = createContext();
@@ -13,10 +14,21 @@ const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
-  const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const register = async (name, email, password) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password).catch((err) =>
+        console.log(err)
+      );
+      await sendEmailVerification(auth.currentUser).catch((err) =>
+        console.log(err)
+      );
+      await updateProfile(auth.currentUser, { displayName: name }).catch(
+        (err) => console.log(err)
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
-
   const signIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -36,7 +48,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ createUser, user, logout, signIn }}>
+    <UserContext.Provider value={{ register, user, logout, signIn }}>
       {children}
     </UserContext.Provider>
   );

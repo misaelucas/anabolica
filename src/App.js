@@ -1,23 +1,20 @@
-import "./App.css";
 import "./assets/fonts.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "./components/Container";
 import Header from "./components/Header";
 import { NewProtocolButton } from "./components/NewProtocolButton";
-function App() {
+import "animate.css";
 
+function App() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex sweet flex-col  justify-between ">
+    <div className="flex sweet  flex-col  justify-between ">
       <Header />
       <div className="">
-      <h1 className="flex justify-center   mt-4 text-5xl ">
-        <p className="title">Anabolic Archives</p>
-      </h1>
-      <NewProtocolButton />
-      <Container />
+        <NewProtocolButton />
+        <Container />
       </div>
     </div>
   );

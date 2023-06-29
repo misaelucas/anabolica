@@ -6,16 +6,17 @@ import Header from "../Header";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
-  const { createUser } = UserAuth();
+  const { register } = UserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await createUser(email, password);
-      navigate("/account");
+      await register(name, email, password)
+      navigate("/");
     } catch (e) {
       setError(e.message);
 
@@ -38,10 +39,18 @@ const Signup = () => {
             Create your account
           </h1>
           <div className="flex flex-col py-2">
+            <label className="py-2 ">Name</label>
+            <input
+              onChange={(e) => setName(e.target.value)}
+              className="border p-1 text-black"
+              type="text"
+            />
+          </div>
+          <div className="flex flex-col py-2">
             <label className="py-2 ">Email Address</label>
             <input
               onChange={(e) => setEmail(e.target.value)}
-              className="border p-1"
+              className="border p-1 text-black"
               type="email"
             />
           </div>
@@ -49,8 +58,9 @@ const Signup = () => {
             <label className="py-2">Password</label>
             <input
               onChange={(e) => setPassword(e.target.value)}
-              className="border p-1"
+              className="border p-1 text-black"
               type="password"
+              autoComplete="on"
             />
           </div>
           <button className="bg-gray-900 text-white drop-shadow-xl rounded drop-shadow hover:text-pink-700 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-300	 hover:bg-gray-900 w-full  p-4 my-2">

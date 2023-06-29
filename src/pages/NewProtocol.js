@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import "../assets/fonts.css";
-import { db } from "../firebase/config";
+import { db, auth } from "../firebase/config";
 import {
   collection,
   query,
@@ -42,6 +42,7 @@ const NewProtocol = () => {
   const [finalBf, setFinalBf] = useState();
   const [addCompoundString, setAddCompoundString] = useState(false);
   const { user, logout } = UserAuth();
+  const [username, setUsername] = useState('')
 
   const navigate = useNavigate();
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -58,7 +59,7 @@ const NewProtocol = () => {
         setDisabled(false);
       }
     };
-
+    setUsername(user.displayName);
     checkDisabled();
   });
 
@@ -78,7 +79,8 @@ const NewProtocol = () => {
         description: description,
         initialBf: initialBf,
         finalBf: finalBf,
-        user: user,
+        user: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+        
       });
       setLoading(true);
       await delay(2000);
@@ -98,6 +100,7 @@ const NewProtocol = () => {
       weeks: weeks,
       dosage: dosage,
       ester: ester,
+      user: user.displayName,
     };
 
     setProtocolObject(newCompoundObject);
@@ -108,7 +111,6 @@ const NewProtocol = () => {
 
   return (
     <div className="mb-6">
-      {console.log(user.uid)}
       <Header />,{loading ? <Loading /> : <></>}
       <section className="max-w-4xl p-6 cursive mx-auto  rounded-md shadow-md dark:bg-gray-900 mt-20">
         <h1 className="text-3xl mb-6 font-bold text-white dark:text-white">
@@ -125,6 +127,7 @@ const NewProtocol = () => {
               type="text"
               placeholder="in words"
               required
+              minlength="5"
               maxLength={42}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
@@ -330,7 +333,7 @@ const NewProtocol = () => {
               type="submit"
               disabled={disabled}
               onClick={addCompound}
-              className="px-6 py-2 leading-5 tracking-widest text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none "
+              className="bg-pink-600 text-white drop-shadow-xl hover:text-gray-900 rounded drop-shadow transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-300	  w-full  p-4 my-2 "
             >
               {" "}
               <p>Add Compound</p>
@@ -353,12 +356,12 @@ const NewProtocol = () => {
             ></textarea>
           </div>
           <br />
-          <div className="flex justify-end mt-12">
+          <div className="flex justify-start   mt-12">
             <button
               onClick={handleSubmit}
-              className="px-6 py-2  tracking-widest leading-5 text-white transition-colors duration-200 transdiv bg-green-600 rounded-md hover:bg-green-700 focus:outline-none"
+              className="bg-pink-600 text-white drop-shadow-xl rounded drop-shadow hover:text-gray-900  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-300 p-2"
             >
-              Submit Protocol!
+              Submit Protocol
             </button>
           </div>
         </div>

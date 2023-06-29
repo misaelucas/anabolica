@@ -9,7 +9,6 @@ const Account = () => {
   const [displayName, setDisplayName] = useState();
   const navigate = useNavigate();
   const auth = getAuth();
-  console.log(auth);
   return (
     <>
       <Header />

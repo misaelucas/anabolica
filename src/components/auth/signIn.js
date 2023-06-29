@@ -37,7 +37,7 @@ const Signin = () => {
             <label className="py-2 ">Email Address</label>
             <input
               onChange={(e) => setEmail(e.target.value)}
-              className="border p-1"
+              className="border p-1 text-black"
               type="email"
             />
           </div>
@@ -45,8 +45,9 @@ const Signin = () => {
             <label className="py-2  ">Password</label>
             <input
               onChange={(e) => setPassword(e.target.value)}
-              className="border p-1"
+              className="border p-1 text-black"
               type="password"
+              autoComplete="on"
             />
           </div>
           <button className="bg-gray-900 text-white drop-shadow-xl rounded drop-shadow hover:text-pink-700 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-300	 hover:bg-gray-900 w-full  p-4 my-2">
