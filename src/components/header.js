@@ -4,24 +4,31 @@ import saitama from "../assets/saitama.png";
 import { LoginButton } from "./LoginButton";
 
 export default function Header() {
-
-
-
   return (
     <div className="flex text-lg justify-between cursive pt-3 w-full h-14  dark:bg-gray-900 text-white underline underline-offset-4 font-semibold ">
       <div>
         <Link to="/">
-          <img src={saitama} alt="saitama bald head" className="pr-2 ml-4 -mt-2 w-16" />
+          <img
+            src={saitama}
+            alt="saitama bald head"
+            className="pr-2 ml-4 -mt-2 w-16"
+          />
         </Link>
       </div>
-      <div className="flex  space-x-2 mt-1  ">
+      <div className="flex text-xl space-x-2 mt-1  ">
         <div className=" ">
-          <Link className=" hover:text-gray-200 text-xl" to="/faq">
+          <Link
+            className="hover:bg-pink-700 hover:text-white p-1 duration-500"
+            to="/faq"
+          >
             faq
           </Link>
         </div>
         <div>
-          <Link className=" hover:text-gray-200 text-xl" to="/contact">
+          <Link
+            className="hover:bg-pink-700 hover:text-white p-1 duration-500"
+            to="/contact"
+          >
             contact
           </Link>
         </div>

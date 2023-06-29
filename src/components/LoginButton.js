@@ -44,7 +44,7 @@ export const LoginButton = () => {
   }
   return (
     <div className="flex  pr-4 mt-1 justify-between ">
-      <Link to="/login" className="text-lg hover:text-gray-200">
+      <Link to="/login" className="hover:text-pink-700  duration-500">
         login
       </Link>
     </div>
