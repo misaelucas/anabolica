@@ -112,13 +112,13 @@ const NewProtocol = () => {
   return (
     <div className="mb-6">
       <Header />,{loading ? <Loading /> : <></>}
-      <section className="max-w-4xl p-6 cursive mx-auto  rounded-md shadow-md dark:bg-gray-900 mt-20">
-        <h1 className="text-3xl mb-6 font-bold text-white dark:text-white">
+      <section className="max-w-4xl p-6 cursive mx-auto  rounded-md shadow-md bg-gray-900 mt-20">
+        <h1 className="text-3xl mb-6 font-bold text-white text-white">
           Create a new one!
         </h1>
         <div className="grid textLg grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
           <div>
-            <label className="text-white dark:text-gray-200">
+            <label className="text-white text-gray-200">
               Name your protocol:
             </label>
             <input
@@ -129,22 +129,22 @@ const NewProtocol = () => {
               required
               minlength="5"
               maxLength={42}
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
           <div>
-            <label className="text-white dark:text-gray-200">Your age:</label>
+            <label className="text-white text-gray-200">Your age:</label>
             <input
               onChange={(e) => setAge(e.target.value)}
               type="number"
               placeholder="in years"
               required
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
-            <label className="text-white dark:text-gray-200" htmlFor="duration">
+            <label className="text-white text-gray-200" htmlFor="duration">
               Duration:
             </label>
             <input
@@ -153,12 +153,12 @@ const NewProtocol = () => {
               type="number"
               required
               placeholder="in weeks"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
           <div>
-            <label className="text-white dark:text-gray-200" htmlFor="height">
+            <label className="text-white text-gray-200" htmlFor="height">
               Height:
             </label>
             <input
@@ -167,11 +167,11 @@ const NewProtocol = () => {
               type="number"
               required
               placeholder="in cms"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
-            <label className="text-white dark:text-gray-200" htmlFor="height">
+            <label className="text-white text-gray-200" htmlFor="height">
               Initial Weight:
             </label>
             <input
@@ -179,11 +179,11 @@ const NewProtocol = () => {
               type="number"
               required
               placeholder="in kgs"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
-            <label className="text-white dark:text-gray-200" htmlFor="height">
+            <label className="text-white text-gray-200" htmlFor="height">
               Final Weight:
             </label>
             <input
@@ -191,11 +191,11 @@ const NewProtocol = () => {
               type="number"
               required
               placeholder="in kgs"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
-            <label className="text-white dark:text-gray-200" htmlFor="height">
+            <label className="text-white text-gray-200" htmlFor="height">
               Initial Body Fat:
             </label>
             <input
@@ -203,11 +203,11 @@ const NewProtocol = () => {
               type="number"
               required
               placeholder="in percentage"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
-            <label className="text-white dark:text-gray-200" htmlFor="height">
+            <label className="text-white text-gray-200" htmlFor="height">
               Final Body Fat:
             </label>
             <input
@@ -215,15 +215,15 @@ const NewProtocol = () => {
               type="number"
               required
               placeholder="in percentage"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
-            <label className="text-white dark:text-gray-200">Strategy:</label>
+            <label className="text-white text-gray-200">Strategy:</label>
             <select
               required
               onChange={(e) => setStrategy(e.target.value)}
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             >
               <option>Recomp</option>
               <option>Cutting</option>
@@ -231,7 +231,7 @@ const NewProtocol = () => {
             </select>
           </div>
           <div className="mb-16">
-            <label className="text-white dark:text-gray-200" htmlFor="height">
+            <label className="text-white text-gray-200" htmlFor="height">
               Calories:
             </label>
             <input
@@ -239,17 +239,17 @@ const NewProtocol = () => {
               type="number"
               required
               placeholder="in kcals"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
           <div className="">
-            <label className="text-white dark:text-gray-200">
+            <label className="text-white text-gray-200">
               Add compound to your protocol:
             </label>
             <select
               onChange={(e) => setProtocolSubstance(e.target.value)}
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             >
               <option>Testosterone</option>
               <option>Nandrolone</option>
@@ -265,10 +265,10 @@ const NewProtocol = () => {
             </select>
           </div>
           <div className="">
-            <label className="text-white dark:text-gray-200">Esters:</label>
+            <label className="text-white text-gray-200">Esters:</label>
             <select
               onChange={(e) => setEster(e.target.value)}
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             >
               <option>Enanthate</option>
               <option>Propionate</option>
@@ -281,16 +281,16 @@ const NewProtocol = () => {
             </select>
           </div>
           <div>
-            <label className="text-white dark:text-gray-200">Dosage</label>
+            <label className="text-white text-gray-200">Dosage</label>
             <input
               onChange={(e) => setDosage(e.target.value)}
               type="number"
               placeholder="in mgs"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
-            <label className="text-white dark:text-gray-200">
+            <label className="text-white text-gray-200">
               How many weeks?
             </label>
             <input
@@ -298,14 +298,14 @@ const NewProtocol = () => {
               id="weeks"
               type="number"
               placeholder="in weeks"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
-            <label className="text-white dark:text-gray-200">Frequency</label>
+            <label className="text-white text-gray-200">Frequency</label>
             <select
               onChange={(e) => setFrequency(e.target.value)}
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             >
               <option>Twice a day</option>
               <option>Every day</option>
@@ -343,7 +343,7 @@ const NewProtocol = () => {
           <div className="w-full">
             <label
               htmlFor="message"
-              className="block mb-2 textLg font-medium text-gray-900 dark:text-white"
+              className="block mb-2 textLg font-medium text-gray-900 text-white"
             >
               Describe your experience.
             </label>
@@ -351,7 +351,7 @@ const NewProtocol = () => {
               id="message"
               rows="4"
               onChange={(e) => setDescription(e.target.value)}
-              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 roundedLg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 roundedLg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
               placeholder=""
             ></textarea>
           </div>

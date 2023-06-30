@@ -19,10 +19,11 @@ const docSnap = await getDocs(protocolRef);
 
 export default function Container() {
   const [protocol, setProtocol] = useState([]);
+
   useEffect(() => {
     const getProtocol = async () => {
       const data = await getDocs(protocolRef);
-      setProtocol(docSnap.docs.map((doc) => ({ ...doc.data(), id: doc.data })));
+      setProtocol(docSnap.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getProtocol();
   }, []);
@@ -54,9 +55,14 @@ export default function Container() {
           <div className="flex flex-col text-white ">
             {protocol.map((item) => {
               return (
-                <div className="flex justify-start underline underline-offset-3">
-                  <Link>
-                    <div className="mt-2 hover:text-pink-600 duration-300">{item.name}</div>
+                <div
+                  key={item.id}
+                  className="flex justify-start underline underline-offset-3"
+                >
+                  <Link to={`/protocol/${item.id}`}>
+                    <div className="mt-2 hover:text-pink-600 duration-300">
+                      {item.name}
+                    </div>
                   </Link>
                 </div>
               );

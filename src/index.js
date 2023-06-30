@@ -11,48 +11,48 @@ import ProtectedRouteSignUp from "./components/ProtectedRouteSignUp";
 
 import Account from "./components/Account";
 import NewProtocol from "./pages/NewProtocol";
+import Protocol from "./pages/Protocol";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <AuthContextProvider>
-      <React.StrictMode>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route
-            path="/register"
-            element={
-              <ProtectedRouteSignUp>
-                <Signup />
-              </ProtectedRouteSignUp>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <ProtectedRouteSignUp>
-                <Signin />
-              </ProtectedRouteSignUp>
-            }
-          />
-          <Route
-            path="/account"
-            element={
-              <ProtectedRoute>
-                <Account />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/new"
-            element={
-              <ProtectedRoute>
-                <NewProtocol />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </React.StrictMode>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route
+          path="/register"
+          element={
+            <ProtectedRouteSignUp>
+              <Signup />
+            </ProtectedRouteSignUp>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <ProtectedRouteSignUp>
+              <Signin />
+            </ProtectedRouteSignUp>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/new"
+          element={
+            <ProtectedRoute>
+              <NewProtocol />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/protocol/:id" element={<Protocol />} />
+      </Routes>
     </AuthContextProvider>
   </BrowserRouter>
 );

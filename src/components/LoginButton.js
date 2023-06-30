@@ -37,7 +37,7 @@ export const LoginButton = () => {
   }
   if (user) {
     return (
-      <button onClick={handleLogout} className="mb-2 pr-4 text-xl">
+      <button onClick={handleLogout} className="mb-2 pr-4 text-xl hover:text-pink-700  duration-500">
         logout
       </button>
     );
