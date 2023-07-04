@@ -5,6 +5,7 @@ import Container from "./components/Container";
 import Header from "./components/Header";
 import { NewProtocolButton } from "./components/NewProtocolButton";
 import "animate.css";
+import { Footer } from "./components/Footer";
 
 function App() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ function App() {
         <NewProtocolButton />
         <Container />
       </div>
+      <Footer />
     </div>
   );
 }

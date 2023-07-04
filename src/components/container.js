@@ -14,29 +14,33 @@ import {
 } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 
-const protocolRef = collection(db, "protocols");
-const docSnap = await getDocs(protocolRef);
-
 export default function Container() {
+  const protocolRef = collection(db, "protocols");
+
   const [protocol, setProtocol] = useState([]);
+  const [sortedProtocol, setSortedProtocol] = useState([]);
 
   useEffect(() => {
-    const getProtocol = async () => {
-      const data = await getDocs(protocolRef);
-      setProtocol(docSnap.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getProtocol();
+    // const getProtocol = async () => {
+    //   setProtocol(docSnap.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    // };
+    fetchData();
   }, []);
-
+  const fetchData = async () => {
+    const docSnap = await getDocs(protocolRef);
+    const data = docSnap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    const sortedData = data.sort((a, b) => b.createdAt - a.createdAt);
+    setSortedProtocol(sortedData);
+  };
   return (
-    <div className="w-full  h-screen flex justify-center">
-      <div className="flex  flex-col flex-wrap p-4 rounded mt-12 w-11/12 bg-gray-900	">
+    <div className="w-full h-screen flex justify-center">
+      <div className="flex flex-col flex-wrap p-4 rounded mt-12 w-11/12 bg-gray-900">
         <div>
-          <div className="mb-3 flex  ">
+          <div className="mb-3 flex">
             <div className="relative mb-4 flex  w-full flex-wrap   items-stretch">
               <input
                 type="search"
-                className="relative m-0  	 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid  bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-white outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-pink-700 focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(37, 150, 190)] focus:outline-none dark:border-pink-700 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                className="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid  bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-white outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-pink-700 focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(37, 150, 190)] focus:outline-none dark:border-pink-700 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                 placeholder="Search"
                 aria-label="Search"
                 aria-describedby="button-addon3"
@@ -52,21 +56,22 @@ export default function Container() {
               </button>
             </div>
           </div>
-          <div className="flex flex-col text-white ">
-            {protocol.map((item) => {
+          <div className="flex flex-col text-white">
+            {sortedProtocol.map((item) => {
               return (
                 <div
                   key={item.id}
                   className="flex justify-start underline underline-offset-3"
                 >
                   <Link to={`/protocol/${item.id}`}>
-                    <div className="mt-2 hover:text-pink-600 duration-300">
+                    <div className="mt-2 hover:text-pink-500 duration-300">
                       {item.name}
                     </div>
                   </Link>
                 </div>
               );
             })}
+            {}
           </div>
         </div>
       </div>
