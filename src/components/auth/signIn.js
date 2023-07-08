@@ -30,7 +30,7 @@ const Signin = () => {
        mx-auto items-center justify-center flex flex-col my-16 p-4"
       >
         <form
-          className="cursive text-2xl text-pink-700"
+          className="cursive text-xl text-pink-700"
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col  py-2">

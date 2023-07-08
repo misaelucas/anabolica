@@ -33,7 +33,7 @@ const Signup = () => {
       >
         <form
           onSubmit={handleSubmit}
-          className="text-pink-700 cursive text-2xl"
+          className="text-pink-700 cursive text-xl"
         >
           <h1 className="flex justify-center text-4xl underline underline-offset-4 pb-4">
             Create your account

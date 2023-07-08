@@ -16,14 +16,16 @@ import {
 import { settings } from "firebase/analytics";
 import { Loading } from "../components/Loading";
 import { UserAuth } from "../context/AuthContext";
+import { Footer } from "../components/Footer";
 
 const NewProtocol = () => {
   const [name, setName] = useState("");
-  const [duration, setDuration] = useState();
-  const [age, setAge] = useState();
-  const [initial, setInitialWeight] = useState();
-  const [finalWeight, setFinalWeight] = useState();
-  const [strategy, setStrategy] = useState("Recomp");
+  const [duration, setDuration] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("Male");
+  const [initial, setInitialWeight] = useState("");
+  const [finalWeight, setFinalWeight] = useState("");
+  const [strategy, setStrategy] = useState("recomp");
   const [height, setHeight] = useState("");
   const [kcal, setKcal] = useState("");
   const [protocolSubstance, setProtocolSubstance] = useState("Testosterone");
@@ -72,6 +74,7 @@ const NewProtocol = () => {
     try {
       await addDoc(collection(db, "protocols"), {
         name: name,
+        gender: gender,
         age: age,
         duration: duration,
         initial: initial,
@@ -136,7 +139,16 @@ const NewProtocol = () => {
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-
+          <div className="">
+            <label className="text-white text-gray-200">Gender:</label>
+            <select
+              onChange={(e) => setGender(e.target.value)}
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
+            >
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
           <div>
             <label className="text-white text-gray-200">Your age:</label>
             <input
@@ -236,14 +248,14 @@ const NewProtocol = () => {
               onChange={(e) => setStrategy(e.target.value)}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             >
-              <option>Recomp</option>
-              <option>Cutting</option>
-              <option>Bulking</option>
+              <option>recomp</option>
+              <option>cutting</option>
+              <option>bulking</option>
             </select>
           </div>
           <div className="mb-16">
             <label className="text-white text-gray-200" htmlFor="height">
-              Calories:
+              Calorie Intake:
             </label>
             <input
               onChange={(e) => setKcal(e.target.value)}
@@ -254,7 +266,7 @@ const NewProtocol = () => {
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-
+          <div></div>
           <div className="">
             <label className="text-white text-gray-200">
               Add compound to your protocol:
@@ -377,6 +389,9 @@ const NewProtocol = () => {
           </div>
         </div>
       </section>
+      <div className="mt-2">
+        <Footer />
+      </div>
     </div>
   );
 };

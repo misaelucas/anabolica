@@ -5,8 +5,12 @@ export const Footer = () => {
   return (
     <div className="flex flex-wrap justify-center text-sm">
       <div className="flex my-2 mt-3">
-        2023 Anabolic Archives - made by misa.
-        <Link className="ml-2 text-xl " to="https://github.com/misaelucas">
+        2023 Anabolic Archives - made by{" "}
+        <Link className="ml-1" to="https://github.com/misaelucas">misa.</Link>
+        <Link
+          className="ml-2 text-xl "
+          to="https://github.com/misaelucas/anabolica"
+        >
           <BsGithub />
         </Link>
       </div>
