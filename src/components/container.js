@@ -37,7 +37,7 @@ export default function Container() {
       <div className="flex flex-col flex-wrap p-4 rounded mt-12 w-11/12 bg-gray-900">
         <div>
           <div className="mb-3 flex">
-            <div className="relative mb-4 flex  w-full flex-wrap   items-stretch">
+            <div className="relative mb-4 flex  w-full flex-wrap items-stretch">
               <input
                 type="search"
                 className="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid  bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-white outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-pink-700 focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(37, 150, 190)] focus:outline-none dark:border-pink-700 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"

@@ -4,19 +4,17 @@ import { useNavigate } from "react-router-dom";
 import "../assets/fonts.css";
 import { db, auth } from "../firebase/config";
 import {
-  collection,
-  query,
-  onSnapshot,
-  doc,
-  setDoc,
-  updateDoc,
-  deleteDoc,
-  addDoc,
-} from "firebase/firestore";
-import { settings } from "firebase/analytics";
+  ref,
+  getStorage,
+  uploadBytes,
+  getDownloadURL,
+  child,
+} from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
 import { Loading } from "../components/Loading";
 import { UserAuth } from "../context/AuthContext";
 import { Footer } from "../components/Footer";
+import { storage } from "../firebase/config";
 
 const NewProtocol = () => {
   const [name, setName] = useState("");
@@ -46,7 +44,8 @@ const NewProtocol = () => {
   const { user, logout } = UserAuth();
   const [username, setUsername] = useState("");
   const [createdAt, setCreatedAt] = useState("");
-
+  const [images, setImages] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
   const navigate = useNavigate();
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -65,12 +64,43 @@ const NewProtocol = () => {
     setCreatedAt(getTimestampInSeconds);
     setUsername(user.displayName);
     checkDisabled();
+    console.log(images);
   });
+
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
+
+  const uploadFiles = async (images) => {
+    const storageRef = ref(storage);
+    const imageUrls = [];
+
+    for (let i = 0; i < images.length; i++) {
+      const imagePath = `images/${username}/${getTimestampInSeconds()}/${
+        images[i].name
+      }`;
+      const imageRef = ref(storageRef, imagePath);
+
+      try {
+        await uploadBytes(imageRef, images[i]);
+        const imageUrl = await getDownloadURL(imageRef);
+        setImageUrls((prevUrls) => [...prevUrls, imageUrl]);
+
+        imageUrls.push(imageUrl);
+        console.log("success");
+      } catch (error) {
+        console.log("error:", error);
+      }
+    }
+    console.log(imageUrls);
+    return imageUrls;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    const uploadedImageUrls = await uploadFiles(images);
+
     try {
       await addDoc(collection(db, "protocols"), {
         name: name,
@@ -88,8 +118,8 @@ const NewProtocol = () => {
         finalBf: finalBf,
         user: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
         createdAt: createdAt,
+        imageUrls: uploadedImageUrls,
       });
-      setLoading(true);
       await delay(2000);
       setLoading(false);
       navigate("/");
@@ -266,7 +296,50 @@ const NewProtocol = () => {
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-          <div></div>
+          <div className="flex flex-col">
+            <div className="App">
+              <div className="flex items-center justify-center w-full">
+                <label
+                  htmlFor="dropzone-file"
+                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                >
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="font-semibold">Click to upload</span> or
+                      drag and drop
+                    </p>
+                  </div>
+                  <input
+                    id="dropzone-file"
+                    onChange={(event) => {
+                      setImages(event.target.files);
+                    }}
+                    multiple
+                    type="file"
+                    className="hidden"
+                  />
+                </label>
+              </div>
+              <button type="submit" onClick={uploadFiles}>
+                Submit
+              </button>
+            </div>{" "}
+          </div>
           <div className="">
             <label className="text-white text-gray-200">
               Add compound to your protocol:
@@ -363,6 +436,7 @@ const NewProtocol = () => {
               <p>Add Compound</p>
             </button>
           )}
+
           <div className="w-full">
             <label
               htmlFor="message"

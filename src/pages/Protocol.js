@@ -3,10 +3,8 @@ import { collection, getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import Header from "../components/Header";
 import classnames from "classnames";
-
 import "../assets/card.css";
 import "../assets/fonts.css";
-
 import { useParams } from "react-router-dom";
 import { Footer } from "../components/Footer";
 
@@ -65,7 +63,6 @@ const Protocol = () => {
             <div className="mt-2 p-2 underline protocol-fields underline-offset-2 ">
               {protocol?.user?.name}
             </div>
-
             <div className="flex flex-col rounded protocol-fields mt-2  py-2 px-1  bg-gray-800">
               <div className="protocol-fields cursive text-xl px-1">
                 User Information

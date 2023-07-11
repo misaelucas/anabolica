@@ -15,7 +15,7 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     try {
-      await register(name, email, password)
+      await register(name, email, password);
       navigate("/");
     } catch (e) {
       setError(e.message);
@@ -31,10 +31,7 @@ const Signup = () => {
         className="max-w-[400px] rounded bg-gray-800 drop-shadow-xl
        mx-auto  justify-center flex flex-col my-16 p-4"
       >
-        <form
-          onSubmit={handleSubmit}
-          className="text-pink-700 cursive text-xl"
-        >
+        <form onSubmit={handleSubmit} className="text-pink-700 cursive text-xl">
           <h1 className="flex justify-center text-4xl underline underline-offset-4 pb-4">
             Create your account
           </h1>
