@@ -1,23 +1,31 @@
 .item:hover {
-    --expand: 1;
-  }
-  .item:before,
-  .item:after {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: #E1DFB4;
-    border: 2px solid #fff;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-  .item:after {
-    transform: translate(calc(var(--expand) * -2%), calc(var(--expand) * -2%));
-    transition: transform 0.2s;
-  }
-  .item__content {
-    transition: transform 0.2s;
-    transform: translate(calc(var(--expand) * -4%), calc(var(--expand) * -4%));
-  }
+  --expand: 1;
+}
+.item:before,
+.item:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #e1dfb4;
+  border: 2px solid #fff;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.item:after {
+  transform: translate(calc(var(--expand) * -2%), calc(var(--expand) * -2%));
+  transition: transform 0.2s;
+}
+.item__content {
+  transition: transform 0.2s;
+  transform: translate(calc(var(--expand) * -4%), calc(var(--expand) * -4%));
+}
+
+.bg-color {
+  background-color: #111827;
+}
+
+.bg-secondary {
+  background-color: #1f2937;
+}

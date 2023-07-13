@@ -15,9 +15,12 @@ import { Loading } from "../components/Loading";
 import { UserAuth } from "../context/AuthContext";
 import { Footer } from "../components/Footer";
 import { storage } from "../firebase/config";
+import { useTabs } from "@material-tailwind/react";
 
 const NewProtocol = () => {
   const [name, setName] = useState("");
+  const [protocolDate, setProtocolDate] = useState("");
+  const [protocolFinalDate, setProtocolFinalDate] = useState("");
   const [duration, setDuration] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("Male");
@@ -45,6 +48,7 @@ const NewProtocol = () => {
   const [username, setUsername] = useState("");
   const [createdAt, setCreatedAt] = useState("");
   const [images, setImages] = useState([]);
+  const [imagesPos, setImagesPos] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const navigate = useNavigate();
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -64,14 +68,15 @@ const NewProtocol = () => {
     setCreatedAt(getTimestampInSeconds);
     setUsername(user.displayName);
     checkDisabled();
-    console.log(images);
+    console.log("asdsa", images);
+    console.log("imagepos", imagesPos);
   });
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
 
-  const uploadFiles = async (images) => {
+  const uploadFiles = async (images, imagesPos) => {
     const storageRef = ref(storage);
     const imageUrls = [];
 
@@ -119,6 +124,8 @@ const NewProtocol = () => {
         user: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
         createdAt: createdAt,
         imageUrls: uploadedImageUrls,
+        protocolDate: protocolDate,
+        protocolFinalDate: protocolFinalDate,
       });
       await delay(2000);
       setLoading(false);
@@ -149,7 +156,7 @@ const NewProtocol = () => {
   return (
     <div className="mb-6">
       <Header />,{loading ? <Loading /> : <></>}
-      <section className="max-w-4xl p-6 cursive mx-auto  rounded-md shadow-md bg-gray-900 mt-20">
+      <section className="max-w-4xl p-6 cursive mx-auto rounded-md shadow-md bg-color mt-20">
         <h1 className="text-3xl mb-6 font-bold text-white text-white">
           Create a new one!
         </h1>
@@ -162,21 +169,43 @@ const NewProtocol = () => {
               onChange={(e) => setName(e.target.value)}
               id="username"
               type="text"
-              placeholder="in words"
+              placeholder="em palavrinhas"
               required
               minLength="5"
               maxLength={42}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
+          <div>
+            <label className="text-white text-gray-200">
+              Início do Protocolo:
+            </label>
+            <input
+              onChange={(e) => setProtocolDate(e.target.value)}
+              type="date"
+              required
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
+            />
+          </div>
+          <div>
+            <label className="text-white text-gray-200">
+              Fim do protocolo:
+            </label>
+            <input
+              onChange={(e) => setProtocolFinalDate(e.target.value)}
+              type="date"
+              required
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
+            />
+          </div>
           <div className="">
-            <label className="text-white text-gray-200">Gender:</label>
+            <label className="text-white text-gray-200">Gênero:</label>
             <select
               onChange={(e) => setGender(e.target.value)}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             >
-              <option>Male</option>
-              <option>Female</option>
+              <option>Homem</option>
+              <option>Mulher</option>
             </select>
           </div>
           <div>
@@ -185,14 +214,14 @@ const NewProtocol = () => {
               onChange={(e) => setAge(e.target.value)}
               type="number"
               min="14"
-              placeholder="in years"
+              placeholder="em anos"
               required
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
             <label className="text-white text-gray-200" htmlFor="duration">
-              Duration:
+              Duração:
             </label>
             <input
               onChange={(e) => setDuration(e.target.value)}
@@ -200,14 +229,14 @@ const NewProtocol = () => {
               type="number"
               min="1"
               required
-              placeholder="in weeks"
+              placeholder="em semanas"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
           <div>
             <label className="text-white text-gray-200" htmlFor="height">
-              Height:
+              Altura:
             </label>
             <input
               onChange={(e) => setHeight(e.target.value)}
@@ -215,64 +244,64 @@ const NewProtocol = () => {
               type="number"
               min="120"
               required
-              placeholder="in cms"
+              placeholder="em centímetros"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
             <label className="text-white text-gray-200" htmlFor="height">
-              Initial Weight:
+              Peso Inicial:
             </label>
             <input
               onChange={(e) => setInitialWeight(e.target.value)}
               type="number"
               required
               min="30"
-              placeholder="in kgs"
+              placeholder="em kgs"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
             <label className="text-white text-gray-200" htmlFor="height">
-              Final Weight:
+              Peso Final:
             </label>
             <input
               onChange={(e) => setFinalWeight(e.target.value)}
               type="number"
               required
               min="30"
-              placeholder="in kgs"
+              placeholder="em kgs"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
             <label className="text-white text-gray-200" htmlFor="height">
-              Initial Body Fat:
+              BF Inicial:
             </label>
             <input
               onChange={(e) => setInitialBf(e.target.value)}
               type="number"
               required
               min="3"
-              placeholder="in percentage"
+              placeholder="em porcentagem"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
             <label className="text-white text-gray-200" htmlFor="height">
-              Final Body Fat:
+              BF Final:
             </label>
             <input
               onChange={(e) => setFinalBf(e.target.value)}
               type="number"
               required
               min="3"
-              placeholder="in percentage"
+              placeholder="em porcentagem"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div>
-            <label className="text-white text-gray-200">Strategy:</label>
+            <label className="text-white text-gray-200">Estratégia:</label>
             <select
               required
               onChange={(e) => setStrategy(e.target.value)}
@@ -285,27 +314,33 @@ const NewProtocol = () => {
           </div>
           <div className="mb-16">
             <label className="text-white text-gray-200" htmlFor="height">
-              Calorie Intake:
+              Ingestão Calórica:
             </label>
             <input
               onChange={(e) => setKcal(e.target.value)}
               type="number"
               required
               min="500"
-              placeholder="in kcals"
+              placeholder="em kcals"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-          <div className="flex flex-col">
-            <div className="App">
+
+          <div></div>
+          <div className="flex flex-col w-full">
+            <p className="text-white text-xl my-2 flex uppercase justify-center">
+              PRÉ PROTOCOLO
+            </p>
+
+            <div className="App flex w-full">
               <div className="flex items-center justify-center w-full">
                 <label
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border rounded-lg cursor-pointer bg-gray-50 hover:bg-bray-800 bg-gray-800 hover:bg-gray-100 border-gray-600 hover:border-gray-500 hover:bg-gray-600"
                 >
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
-                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                      className="w-8 h-8 mb-4 text-gray-500 text-gray-400"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -319,9 +354,11 @@ const NewProtocol = () => {
                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                       />
                     </svg>
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Click to upload</span> or
-                      drag and drop
+                    <p className="mb-2 text-sm text-gray-500 ">
+                      <span className="font-semibold">
+                        Clique para adicionar fotos
+                      </span>{" "}
+                      ou arraste
                     </p>
                   </div>
                   <input
@@ -335,30 +372,76 @@ const NewProtocol = () => {
                   />
                 </label>
               </div>
-              <button type="submit" onClick={uploadFiles}>
-                Submit
-              </button>
-            </div>{" "}
+            </div>
           </div>
+
+          <div className="flex flex-col w-full">
+            <p className="text-white text-xl my-2 flex uppercase justify-center">
+              PÓS PROTOCOLO
+            </p>
+            <div className="App flex w-full">
+              <div className="flex items-center justify-center w-full">
+                <label
+                  htmlFor="dropzone-file-pos"
+                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border rounded-lg cursor-pointer bg-gray-50 hover:bg-bray-800 bg-gray-800 hover:bg-gray-100 border-gray-600 hover:border-gray-500 hover:bg-gray-600"
+                >
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-gray-500 text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <p className="mb-2 text-sm text-gray-500 ">
+                      <span className="font-semibold">
+                        Clique para adicionar fotos
+                      </span>{" "}
+                      ou arraste
+                    </p>
+                  </div>
+                  <input
+                    id="dropzone-file-pos"
+                    onChange={(event) => {
+                      setImagesPos(event.target.files);
+                    }}
+                    multiple
+                    type="file"
+                    className="hidden"
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div></div>
+          <div></div>
           <div className="">
             <label className="text-white text-gray-200">
-              Add compound to your protocol:
+              Adicionar composto ao protocolo:
             </label>
             <select
               onChange={(e) => setProtocolSubstance(e.target.value)}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             >
-              <option>Testosterone</option>
-              <option>Nandrolone</option>
+              <option>Testosterona</option>
+              <option>Nandrolona</option>
               <option>Masteron</option>
-              <option>Boldenone</option>
+              <option>Boldenona</option>
               <option>Primobolan</option>
-              <option>Oxandrolone</option>
+              <option>Oxandrolona</option>
               <option>Dianabol</option>
               <option>Turinabol</option>
               <option>Stanozolol</option>
               <option>Halostenin</option>
-              <option>Oxymetholone</option>
+              <option>Hemogenin</option>
             </select>
           </div>
           <div className="">
@@ -367,23 +450,25 @@ const NewProtocol = () => {
               onChange={(e) => setEster(e.target.value)}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             >
-              <option>Enanthate</option>
-              <option>Propionate</option>
-              <option>Cypionate</option>
-              <option>Decanoate</option>
-              <option>Undecanoate</option>
-              <option>Phenylproprionate</option>
+              <option>Enantato</option>
+              <option>Propionato</option>
+              <option>Cipionato</option>
+              <option>Decanoato</option>
+              <option>Undecanoato</option>
+              <option>Fempropionato</option>
               <option>Oral</option>
-              <option>Injectable (option for stanozolol and Primobolan)</option>
+              <option>injetável (opção para stanozolol e primobolan)</option>
             </select>
           </div>
           <div>
-            <label className="text-white text-gray-200">Dosage</label>
+            <label className="text-white text-gray-200">Dosagem</label>
             <input
-              onChange={(e) => setDosage(e.target.value)}
               type="number"
+              onChange={(e) => {
+                const input = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                setDosage(input);
+              }}
               min="0"
-              placeholder="in mgs"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
@@ -399,21 +484,25 @@ const NewProtocol = () => {
             />
           </div>
           <div>
-            <label className="text-white text-gray-200">Frequency</label>
+            <label className="text-white text-gray-200">Frequência</label>
             <select
-              onChange={(e) => setFrequency(e.target.value)}
+              onChange={(e) => {
+                const input = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                setFrequency(input);
+              }}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md bg-gray-800 text-black border-gray-600 focus:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring"
             >
-              <option>Twice a day</option>
-              <option>Every day</option>
-              <option>Every 2 days</option>
-              <option>Every 3 days</option>
-              <option>Every 4 days</option>
-              <option>Every 5 days</option>
-              <option>Every 6 days</option>
-              <option>Every 7 days</option>
-              <option>Every 10 days</option>
-              <option>Every 14 days</option>
+              <option>Três vezes ao dia</option>
+              <option>Duas vezes ao dia</option>
+              <option>Todo dia</option>
+              <option>A cada 2 dias</option>
+              <option>A cada 3 dias</option>
+              <option>A cada 4 dias</option>
+              <option>A cada 5 dias</option>
+              <option>A cada 6 dias</option>
+              <option>A cada 7 dias</option>
+              <option>A cada 10 dias</option>
+              <option>A cada 14 dias</option>
             </select>
           </div>
           {addCompoundString ? (
@@ -421,9 +510,9 @@ const NewProtocol = () => {
               type="submit"
               disabled={disabled}
               onClick={addCompound}
-              className="px-6 py-2 bg-green-600 leading-5 tracking-widest text-white transition-colors duration-200 transdiv bg-green-500 rounded-md hover:bg-green-500 focus:outline-none "
+              className="px-6 py-2  leading-5 tracking-widest text-white transition-colors duration-200 transdiv  rounded-md bg-pink-300 focus:outline-none "
             >
-              <p className="uppercase">Added!!</p>
+              <p className="uppercase">Adicionado!</p>
             </button>
           ) : (
             <button
@@ -433,7 +522,7 @@ const NewProtocol = () => {
               className=" bg-pink-600 text-white drop-shadow-xl  hover:text-gray-900 rounded drop-shadow transition ease-in-out  delay-150 sm:mt-6 py-2 sm:py-0"
             >
               {" "}
-              <p>Add Compound</p>
+              <p>Adicionar Composto</p>
             </button>
           )}
 
@@ -442,13 +531,13 @@ const NewProtocol = () => {
               htmlFor="message"
               className="block mb-2 textLg font-medium text-gray-900 text-white"
             >
-              Describe your experience.
+              Descreva sua experiência.
             </label>
             <textarea
               id="message"
               rows="4"
               onChange={(e) => setDescription(e.target.value)}
-              className="block p-2.5 w-full text-sm text-black bg-gray-50 roundedLg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+              className="block p-2.5 w-full text-sm text-black bg-white roundedLg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
               placeholder=""
             ></textarea>
           </div>
@@ -458,7 +547,7 @@ const NewProtocol = () => {
               onClick={handleSubmit}
               className="bg-pink-600 text-white drop-shadow-xl rounded drop-shadow hover:text-gray-900  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-300 p-2"
             >
-              Submit Protocol
+              Enviar Protocolo
             </button>
           </div>
         </div>

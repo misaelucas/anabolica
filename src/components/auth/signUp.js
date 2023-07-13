@@ -28,7 +28,7 @@ const Signup = () => {
     <div>
       <Header />
       <div
-        className="max-w-[400px] rounded bg-gray-800 drop-shadow-xl
+        className="max-w-[400px] rounded bg-color drop-shadow-xl
        mx-auto  justify-center flex flex-col my-16 p-4"
       >
         <form onSubmit={handleSubmit} className="text-pink-700 cursive text-xl">
@@ -60,7 +60,7 @@ const Signup = () => {
               autoComplete="on"
             />
           </div>
-          <button className="bg-gray-900 text-white drop-shadow-xl rounded drop-shadow hover:text-pink-700 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-300	 hover:bg-gray-900 w-full  p-4 my-2">
+          <button className="bg-[#1e293b] text-white drop-shadow-xl rounded drop-shadow hover:text-pink-700 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-300	 hover:bg-color w-full  p-4 my-2">
             Register
           </button>
         </form>

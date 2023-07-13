@@ -34,7 +34,7 @@ export default function Container() {
   };
   return (
     <div className="w-full h-screen flex justify-center">
-      <div className="flex flex-col flex-wrap p-4 rounded mt-12 w-11/12 bg-gray-900">
+      <div className="flex flex-col flex-wrap p-4 rounded mt-12 w-11/12 bg-color">
         <div>
           <div className="mb-3 flex">
             <div className="relative mb-4 flex  w-full flex-wrap items-stretch">

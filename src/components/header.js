@@ -5,7 +5,7 @@ import { LoginButton } from "./LoginButton";
 
 export default function Header() {
   return (
-    <div className="flex text-lg justify-between cursive pt-3 w-full h-14  dark:bg-gray-900 text-white underline underline-offset-4 font-semibold ">
+    <div className="flex text-lg justify-between cursive pt-3 w-full h-14  bg-color text-white underline underline-offset-4 font-semibold ">
       <div>
         <Link to="/">
           <img
